@@ -1,0 +1,21 @@
+FROM python:3.10-slim
+
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+WORKDIR /app
+
+COPY app /app
+COPY keys /app/keys
+COPY requirements.txt /app/
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/keys/service-account.json
+
+# Expose the api port
+EXPOSE 8000
+
+# Run the api
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

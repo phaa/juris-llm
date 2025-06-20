@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-dotenv
+pydantic
+pymupdf
+tqdm
+chromadb 
+sentence-transformers
+langchain 
+langchain-community
+prometheus-fastapi-instrumentator
+google-cloud-aiplatform 
+vertexai
