@@ -9,5 +9,5 @@ sentence-transformers
 langchain 
 langchain-community
 prometheus-fastapi-instrumentator
-google-cloud-aiplatform 
-vertexai
+google-genai
+loguru

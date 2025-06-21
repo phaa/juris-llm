@@ -11,7 +11,7 @@ def answer_question(question: str) -> str:
         collection = get_chroma_collection()
         results = collection.query(query_texts=[question], n_results=3)
         context = "\n\n".join(results["documents"][0])
-
+        print(context)
         prompt = f"""
         Responda à pergunta com base no seguinte contexto da Constituição:
 
@@ -22,8 +22,8 @@ def answer_question(question: str) -> str:
         """
 
         response = client.models.generate_content(
-            model="gemini-1.5-flash-002",
-            contents="How does AI work?",
+            model="gemini-2.5-flash-preview-05-20",
+            contents=prompt,
         )
 
         logger.info(f"Response generated successfully")

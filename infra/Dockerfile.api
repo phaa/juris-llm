@@ -5,14 +5,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /app
 
-COPY app /app
-COPY keys /app/keys
-COPY requirements.txt /app/
+COPY requirements.txt .
 
-# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENV GOOGLE_APPLICATION_CREDENTIALS=/app/keys/service-account.json
+COPY app ./app
+COPY keys ./keys
+COPY data ./data
 
 # Expose the api port
 EXPOSE 8000
