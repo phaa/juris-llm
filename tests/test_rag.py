@@ -1,5 +1,5 @@
 from unittest.mock import patch, MagicMock
-from app.rag import answer_question
+from app.rag.main import answer_question
 from app.logging_config import logger
 
 @patch("app.rag.get_chroma_collection")

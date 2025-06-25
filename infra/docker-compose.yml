@@ -9,8 +9,11 @@ services:
     env_file:
       - ../.env
     volumes:
+      - ../app:/app # ensure hot reloading
+      - ../data:/data
       - ../chroma_db:/app/chroma_db
       - ../keys:/app/keys:ro # mounts json on container
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload # overwriting dockerfile
 
   prometheus:
     image: prom/prometheus:latest

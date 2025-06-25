@@ -1,22 +1,26 @@
 from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 from prometheus_fastapi_instrumentator import Instrumentator
 
-from app.models import Question, Answer
-from app.rag import answer_question
-from app.embed_chunks import generate_chunks
+from logging_config import logger
+from rag.embed_chunks import generate_data_store
+from api import main
 
+logger.info(f"Initializing ChromaDB")
+generate_data_store()
+
+logger.info("Initializing FastAPI")
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["DELETE", "GET", "POST", "PUT"],
+    allow_headers=["*"],
+)
 
 # Prometheus middleware endpoint /metrics
 Instrumentator().instrument(app).expose(app)
 
-@app.get("/ask", response_model=Answer)
-def ask(question: str): # change to Question
-    response = answer_question(question)
-    return Answer(text=response)
-
-
-@app.get("/generate", response_model=Answer)
-def ask(): # change to Question
-    response = generate_chunks()
-    return Answer(text="OK")
+logger.info("Initializing Routes")
+app.include_router(main.router, prefix="", tags=["index"])
