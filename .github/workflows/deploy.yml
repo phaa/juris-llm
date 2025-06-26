@@ -30,7 +30,9 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/juris-api/juris-api:latest -f infra/Dockerfile.api .
+        docker build -t $IMAGE -f infra/Dockerfile.api .
+      env:
+        IMAGE: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/juris-api/juris-api:latest
 
     - name: Push Docker image to Artifact Registry
       run: |
