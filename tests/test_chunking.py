@@ -1,22 +1,11 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from app.utils.text_tools import clean_text
+
+from app.rag.embed_chunks import load_documents, split_text
 
 
 def test_chunking():
-    sample_text = (
-        "Art. 1º Todos são iguais perante a lei.\n\n"
-        "Art. 2º Ninguém será obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de lei.\n\n"
-        "Art. 3º É livre a manifestação do pensamento."
-    )
-
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size = 100,
-        chunk_overlap=20,
-        separators=["\n\n", "\n", "."]
-    )
-
-    chunks = splitter.split_text(sample_text)
-    chunks = [clean_text(c) for c in chunks]
+    documents = load_documents()  # Load documents from a source
+    chunks = split_text(documents)  # Split documents into manageable chunks
 
     assert isinstance(chunks, list)
     assert len(chunks) >= 2 # Must split the text
