@@ -34,9 +34,12 @@ jobs:
       env:
         IMAGE: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/juris-api/juris-api:latest
 
-    - name: Push Docker image to Artifact Registry
+    - name: Configure Docker auth for Artifact Registry
       run: |
         gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
+
+    - name: Push Docker image to Artifact Registry
+      run: |
         docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/juris-api/juris-api:latest
 
     - name: Deploy to Cloud Run
