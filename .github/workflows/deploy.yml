@@ -52,8 +52,4 @@ jobs:
           --port=8000 \
           --memory=1Gi \
           --timeout=600 \
-          --set-env-vars=\
-            GOOGLE_APPLICATION_CREDENTIALS=/app/keys/service-account.json,\
-            GOOGLE_CLOUD_PROJECT=cloud-build-462813,\
-            GOOGLE_CLOUD_LOCATION=global,\
-            GOOGLE_GENAI_USE_VERTEXAI=True
+          --set-env-vars=GOOGLE_APPLICATION_CREDENTIALS=/app/keys/service-account.json
