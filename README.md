@@ -1,34 +1,34 @@
-# Juris-LLM: Sistema de Perguntas e Respostas Jurídico com RAG
+# Juris-LLM: Legal Question-Answering System with RAG
 
-Projeto de IA generativa com foco em **documentos jurídicos**, como a Constituição Federal de 1988, utilizando uma arquitetura RAG (Retrieval-Augmented Generation), LLM local ou na nuvem, observabilidade com Prometheus e Grafana, além de MLOps com CI/CD, DVC e MLflow.
+Generative AI project focused on **legal documents**, such as the Brazillian Federal Constitution of 1988, utilizing a RAG (Retrieval-Augmented Generation) architecture, a local or cloud-based LLM, observability with Prometheus and Grafana, in addition to MLOps with CI/CD, DVC, and MLflow.
 
-## 🚀 Funcionalidades
+## Project Features
 
-- ✅ **Ingestão e chunking** inteligente de PDFs jurídicos  
-- ✅ **Vetorização semântica** com SentenceTransformers  
-- ✅ **Armazenamento vetorial** com ChromaDB  
-- ✅ **Busca semântica** e recuperação com LangChain  
-- ✅ **Geração de respostas** com modelo LLaMA local (vLLM) ou Gemini (Vertex AI)  
-- ✅ **API RESTful** com FastAPI  
-- ✅ **Testes automatizados** com Pytest e TestClient  
-- ✅ **Monitoramento** com Prometheus e Grafana  
-- ✅ **CI/CD** com GitHub Actions e Google Cloud Run  
-- ✅ **MLOps** com DVC + MLflow (em progresso)  
+- **Smart ingestion and chunking** of legal PDFs
+- **Semantic vectorization** with SentenceTransformers
+- **Vector storage** with ChromaDB
+- **Semantic search** and retrieval with LangChain
+- **Response generation** with local LLaMA model (vLLM) or Gemini (Vertex AI)
+- **RESTful API** with FastAPI
+- **Automated testing** with Pytest and TestClient
+- **Monitoring** with Prometheus and Grafana
+- **CI/CD** with GitHub Actions and Google Cloud Run
+- **MLOps** with DVC + MLflow (in progress)
 
-## 🛠️ Tecnologias e Ferramentas
+## Technologies and Tools
 
-| Categoria             | Tecnologias                                                       |
-|-----------------------|--------------------------------------------------------------------|
-| 🔍 Vetorização         | `sentence-transformers`, `ChromaDB`, `LangChain`                  |
-| 🧠 LLMs                | `vLLM` + `Hugging Face` + `Transformers` ou `Vertex AI` (Gemini)  |
-| 🧰 Backend API         | `FastAPI`, `Pydantic`, `Uvicorn`                                  |
-| 📦 Containerização     | `Docker`, `Docker Compose`, `NVIDIA CUDA Base Image`              |
-| 🔬 Testes              | `Pytest`, `TestClient`, mocks                                     |
-| 📊 Observabilidade     | `prometheus_client`, `Prometheus`, `Grafana`                      |
-| 🔁 CI/CD               | `GitHub Actions`, `Cloud Run`, `Artifact Registry`, `GCP`         |
-| 🧪 MLOps               | `DVC`, `MLflow` (em breve)                                        |
+| Category | Technologies |
+|---|---|
+| Vectorization | `sentence-transformers`, `ChromaDB`, `LangChain` |
+| LLMs | `vLLM` + `Hugging Face` + `Transformers` or `Vertex AI` (Gemini) |
+| Backend API | `FastAPI`, `Pydantic`, `Uvicorn` |
+| Containerization | `Docker`, `Docker Compose`, `NVIDIA CUDA Base Image` |
+| Testing | `Pytest`, `TestClient`, mocks |
+| Observability | `prometheus_client`, `Prometheus`, `Grafana` |
+| CI/CD | `GitHub Actions`, `Cloud Run`, `Artifact Registry`, `GCP` |
+| MLOps | `DVC`, `MLflow` (coming soon) |
 
-## 📂 Estrutura de Pastas
+## Folder Structure
 
 ```
 juris-llm/
@@ -57,69 +57,64 @@ juris-llm/
 └── README.md
 ```
 
-## 📦 Instalação Local (com Docker)
+## Local Installation (with Docker)
 
 ```bash
-# Clone o repositório
-git clone https://github.com/seu-usuario/juris-llm.git
+# Clone the repository
+git clone [https://github.com/seu-usuario/juris-llm.git](https://github.com/seu-usuario/juris-llm.git)
 cd juris-llm
 
-# Crie seu arquivo .env
+# Create your .env file
 cp .env.example .env
 
-# Suba os serviços
+# Bring up the services
 docker-compose up --build
 ```
 
-## 🧪 Testes
+## Testing
 
 ```bash
-# No terminal (com ambiente ativado)
+# In the terminal (with activated environment)
 pytest
 ```
 
-## 📈 Monitoramento
+## Monitoring
 
-- Acesse o Prometheus em `http://localhost:9090`
-- Acesse o Grafana em `http://localhost:3000`
-  - User: `admin`
-  - Pass: `admin`
-  - Adicione Prometheus como data source e crie dashboards
+- Access Prometheus at http://localhost:9090
+- Access Grafana at http://localhost:3000
+  - User: admin
+  - Pass: admin
+  - Add Prometheus as a data source and create dashboards
 
-## ☁️ Deploy com CI/CD (Cloud Run)
+## Deploy with CI/CD (Cloud Run)
+CI/CD pipeline integrated with GitHub Actions:
+- Authenticates with a service account key
+- Builds the Docker image
+- Pushes to Google Artifact Registry
+- Deploys to Cloud Run with defined variables
 
-Pipeline de CI/CD integrado com GitHub Actions:
+## LLM Usage
 
-- Autentica com chave de service account
-- Faz build da imagem Docker
-- Faz push para o Google Artifact Registry
-- Faz deploy na Cloud Run com variáveis definidas
+### Local Model
+- Using vLLM with CUDA support
+- Serves an HTTP endpoint separate from the API
 
-## 🤖 Uso de LLMs
+### Model via Vertex AI
+- Gemini (preview): gemini-2.5-flash-preview-05-20
+- Integration via SDK: google-genai
 
-### Modelo Local
+## Future Extensions
+- Web Interface with Streamlit or Next.js
+- Database storage (e.g., PostgreSQL + pgvector)
+- Caching with Redis
+- Authentication with OAuth2
+- LLM Fine-tuning
 
-- Usando vLLM com suporte a CUDA
-- Serve um endpoint HTTP separado da API
-
-### Modelo via Vertex AI
-
-- Gemini (preview): `gemini-2.5-flash-preview-05-20`
-- Integração via SDK: `google-genai`
-
-## 📚 Futuras Extensões
-
-- Interface Web com Streamlit ou Next.js
-- Armazenamento em banco de dados (ex: PostgreSQL + pgvector)
-- Cache com Redis
-- Autenticação com OAuth2
-- Fine-tuning de LLM
-
-## 👨‍💻 Autor
+## Author
 
 Pedro Henrique Azevedo  
 [LinkedIn](https://www.linkedin.com/in/pedro-henrique-azevedo/) • [GitHub](https://github.com/phazevedo)
 
-## 📝 Licença
+## License
 
-Este projeto está licenciado sob os termos da **MIT License**.
+This project is licensed under the **MIT License**.
